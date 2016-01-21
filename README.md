@@ -14,16 +14,20 @@ the [R project homepage](http://www.r-project.org/) for further information.
 store identical, up-to-date, versions of code and documentation for R.
 
 ## Building the buildpack with cached dependencies
-Replace ```<app_name>``` with the name of your app. Also replace ```<version>``` with the version number found in /VERSION
+Building a version of the buildpack with cached dependencies requires Ruby version 2.2.3. Replace ```<app_name>``` with the name of your app. Also replace ```<version>``` with the version number found in /VERSION
+
 1) cd into the root directory of the CloudFoundry buildpack for R
+
 2) Execute a bundle install to install the necessary gems
 ``` 
 $ bundle install 
 ```
+
 3) Execute the build buildpack-packager command to generate a zip file with the downloaded dependencies
 ```
 $ bundle exec buildpack-packager --cached
 ```
+
 4) Upload the buildpack to Cloud Foundry and optionally specify it by name
 ```
 $ cf create-buildpack custom_r_buildpack R_buildpack-cached-v<version>.zip
