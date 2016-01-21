@@ -13,6 +13,22 @@ the [R project homepage](http://www.r-project.org/) for further information.
 [CRAN](http://cran.r-project.org/) is a network of ftp and web servers around the world that
 store identical, up-to-date, versions of code and documentation for R.
 
+## Building the buildpack with cached dependencies
+1) cd into the root directory of the CloudFoundry buildpack for R
+2) Execute a bundle install to install the necessary gems
+``` 
+$ bundle install 
+```
+3) Execute the build buildpack-packager command to generate a zip file with the downloaded dependencies
+```
+$ bundle exec buildpack-packager --cached
+```
+4) Upload the buildpack to Cloud Foundry and optionally specify it by name
+```
+$ cf create-buildpack custom_r_buildpack R_buildpack-cached-v3.1.0.zip
+$ cf push my_app -b custom_r_buildpack 
+```
+
 ## Usage
 Example usage (replace ```<app_name>``` with the name of your app):
 
